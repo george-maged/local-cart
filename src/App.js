@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
 import Product from './Components/Product'
-import CartItem from './Components/CartItem'
+import Cart from './Components/Cart'
 class App extends Component {
   constructor(){
     super();
     this.handleProductClick = this.handleProductClick.bind(this)
     this.handleCartClick = this.handleCartClick.bind(this)
+    this.handleClearClick = this.handleClearClick.bind(this)
     this.state={
       products:[],
       cart:[],
@@ -24,13 +25,32 @@ class App extends Component {
     })
   }
   handleProductClick(product){
+    let cart = this.state.cart.slice(0);
+    for(let i = 0 ; i < cart.length;i++){
+      if(cart[i].product.title === product.title){
+        cart[i].count++;
+        this.setState({
+          cart:cart,
+          open:true
+        })
+        return;
+      }
+    }
+    let cartObject = {
+      product:product,
+      count:1
+    }
+    cart.push(cartObject)
     this.setState({
-      cart: [...this.state.cart, product],
+      cart: cart,
       open: true
     })
   }
   handleCartClick(){
     this.setState({open:!this.state.open})
+  }
+  handleClearClick(){
+    this.setState({cart:[]})
   }
   render() {
     return (
@@ -45,18 +65,10 @@ class App extends Component {
         </div>
         <div className="content">
         {this.state.open?(
-            
-            <div className="cart">
-              {
-                this.state.cart.length===0?(
-                  'Your Cart is Empty'
-                ) :(
-                  this.state.cart.map((product)=>(
-                    <CartItem product={product} />
-                  ))
-                )
-              }
-            </div>
+            <Cart
+              cart={this.state.cart}
+              handleClearClick={this.handleClearClick}
+            />
           ):('')}   
           <div style={{width:(this.state.open?("75%"):("100%"))}}className="content__inner">
             {this.state.products.map((product,index)=>(

@@ -5,7 +5,7 @@ class Item extends Component {
   render() {
     return (
         <div className="cart__item">
-        {this.props.product.title}
+        {this.props.product.title+" ("+this.props.count+")"}
       </div>
     );
   }
