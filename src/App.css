@@ -15,6 +15,7 @@ span.header__left {
   position: absolute;
   left: 0;
   letter-spacing: 10px;
+  font-size: 24px;
 }
 
 span.header__right {
