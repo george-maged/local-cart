@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './styles/Product.css';
 
 class Item extends Component {
   render() {

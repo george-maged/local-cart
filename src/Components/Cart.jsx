@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './styles/Product.css';
 import CartItem from './CartItem'
 
 class Cart extends Component {
