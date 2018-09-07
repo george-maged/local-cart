@@ -8,6 +8,7 @@ class App extends Component {
     this.handleProductClick = this.handleProductClick.bind(this)
     this.handleCartClick = this.handleCartClick.bind(this)
     this.handleClearClick = this.handleClearClick.bind(this)
+    this.handleCountClick = this.handleCountClick.bind(this)
     this.state={
       products:[],
       cart:[],
@@ -36,21 +37,33 @@ class App extends Component {
         return;
       }
     }
-    let cartObject = {
+    let productObject = {
       product:product,
       count:1
     }
-    cart.push(cartObject)
+    cart.push(productObject)
     this.setState({
       cart: cart,
       open: true
+    })
+  }
+  handleCountClick(index,value){
+    let cart = this.state.cart.slice(0);
+    cart[index].count += value;
+    if(cart[index].count <1){
+      cart.splice(index,1)
+    }
+    this.setState({
+      cart:cart
     })
   }
   handleCartClick(){
     this.setState({open:!this.state.open})
   }
   handleClearClick(){
-    this.setState({cart:[]})
+    this.setState({
+      cart:[]
+    })
   }
   render() {
     return (
@@ -68,6 +81,7 @@ class App extends Component {
             <Cart
               cart={this.state.cart}
               handleClearClick={this.handleClearClick}
+              handleCountClick={this.handleCountClick}
             />
           ):('')}   
           <div style={{width:(this.state.open?("75%"):("100%"))}}className="content__inner">
@@ -79,10 +93,8 @@ class App extends Component {
               product={product}/>
             ))}
           </div>
-          
         </div>
       </div>
-
     );
   }
 }

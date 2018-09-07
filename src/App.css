@@ -8,7 +8,7 @@
 
 .header {
   height: 40px;
-  border-bottom: 1px solid grey;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
 }
 
 span.header__left {
@@ -29,11 +29,17 @@ span.header__right {
   cursor: pointer;
 }
 
-.cart {
-  width: 25%;
-  float: right;
-}
 
 * {
   box-sizing: border-box;
+}
+
+.content {
+  position: absolute;
+  height: auto;
+  width: 100%;
+}
+
+button {
+  background: #FFFF;
 }

@@ -17,11 +17,18 @@
 .product__content {
     border: 1px solid;
     padding: 10px;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: center;
+    justify-content: center;
     margin-top: -4px;
 }
 
 span.product__content-title {
     float: left;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
     text-transform: uppercase;
     font-size: 13px;
 }
@@ -41,7 +48,10 @@ span.product__content-button button {
     border-radius: 0px;
     border: 1px solid;
     cursor: pointer;
+    padding: 5px 20px;
+    font-weight: bold;
 }
+
 .product__price {
     position: absolute;
     top: 30px;
