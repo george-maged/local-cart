@@ -41,9 +41,8 @@ class App extends Component {
       product:product,
       count:1
     }
-    cart.push(productObject)
     this.setState({
-      cart: cart,
+      cart: [...cart,productObject],
       open: true
     })
   }
