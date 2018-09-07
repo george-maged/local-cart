@@ -31,6 +31,7 @@ span.product__content-title {
     margin-bottom: auto;
     text-transform: uppercase;
     font-size: 13px;
+    text-align: left;
 }
 
 span.product__content-button button:hover {
@@ -48,7 +49,8 @@ span.product__content-button button {
     border-radius: 0px;
     border: 1px solid;
     cursor: pointer;
-    padding: 5px 20px;
+    width: 100px;
+    padding: 5px 15px;
     font-weight: bold;
 }
 
@@ -62,11 +64,11 @@ span.product__content-button button {
 }
 
 .open {
-    width: 25%;
+    width: 33.3333%;
 }
 
 .closed {
-    width: 33.3333%;
+    width: 25%;
 }
 
 @media only screen and (max-width: 768px) {
