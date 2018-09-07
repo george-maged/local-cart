@@ -60,3 +60,21 @@ span.product__content-button button {
     background: #0D0D0D;
     padding: 15px;
 }
+
+.open {
+    width: 25%;
+}
+
+.closed {
+    width: 33.3333%;
+}
+
+@media only screen and (max-width: 768px) {
+    .open {
+        display: none;
+    }
+    
+    .closed {
+        width: 100%;
+    }
+}

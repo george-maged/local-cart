@@ -88,6 +88,7 @@ class App extends Component {
             {this.state.products.map((product,index)=>(
               <Product 
               onClick={()=>this.handleProductClick(product)} 
+              productClass = {this.state.open?("open"):("closed")}
               style={{width:(this.state.open?("33.3333%"):("25%"))}} 
               key={index} 
               product={product}/>

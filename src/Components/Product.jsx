@@ -4,7 +4,7 @@ import './styles/Product.css';
 class Product extends Component {
   render() {
     return (
-      <div style={this.props.style} className="product">
+      <div className={"product "+this.props.productClass}>
         <img src={this.props.product.image} alt={this.props.product.title}/>
         <div className="product__price">
           {this.props.product.price} EGP

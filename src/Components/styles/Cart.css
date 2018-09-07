@@ -69,3 +69,8 @@ span.cart__header-right {
     margin: 0px 20px;
 }
 
+@media only screen and (max-width: 768px) {
+    .cart{
+        width: 100%;
+    }
+}
