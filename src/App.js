@@ -49,7 +49,7 @@ class App extends Component {
             <Cart
               cart={this.state.cart}
               // cartEmitter={CartEmitter}
-              handleClearClick={this.handleClearClick}
+              handleClearClick={()=>cartEmitter.clearCart()}
               handleCountClick={(index,value)=>cartEmitter.changeCount(index,value)}
             />
           ):('')}   
