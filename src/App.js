@@ -2,16 +2,15 @@ import React, { Component } from 'react';
 import './App.css';
 import Product from './Components/Product'
 import Cart from './Components/Cart'
+import CartEmitter from "./cart"
+let cartEmitter = new CartEmitter();
 class App extends Component {
   constructor(){
     super();
-    this.handleProductClick = this.handleProductClick.bind(this)
     this.handleCartClick = this.handleCartClick.bind(this)
-    this.handleClearClick = this.handleClearClick.bind(this)
-    this.handleCountClick = this.handleCountClick.bind(this)
     this.state={
       products:[],
-      cart:[],
+      cart:cartEmitter.getCart(),
       open:false
     }
   }
@@ -24,45 +23,15 @@ class App extends Component {
     .catch((error)=>{
       console.log(error)
     })
-  }
-  handleProductClick(product){
-    let cart = this.state.cart.slice(0);
-    for(let i = 0 ; i < cart.length;i++){
-      if(cart[i].product.title === product.title){
-        cart[i].count++;
-        this.setState({
-          cart:cart,
-          open:true
-        })
-        return;
-      }
-    }
-    let productObject = {
-      product:product,
-      count:1
-    }
-    this.setState({
-      cart: [...cart,productObject],
-      open: true
-    })
-  }
-  handleCountClick(index,value){
-    let cart = this.state.cart.slice(0);
-    cart[index].count += value;
-    if(cart[index].count <1){
-      cart.splice(index,1)
-    }
-    this.setState({
-      cart:cart
+    cartEmitter.subscribe("cart.changed",(newCart)=>{
+      this.setState({
+        cart:newCart,
+        open:true
+      })
     })
   }
   handleCartClick(){
     this.setState({open:!this.state.open})
-  }
-  handleClearClick(){
-    this.setState({
-      cart:[]
-    })
   }
   render() {
     return (
@@ -79,14 +48,16 @@ class App extends Component {
         {this.state.open?(
             <Cart
               cart={this.state.cart}
+              // cartEmitter={CartEmitter}
               handleClearClick={this.handleClearClick}
-              handleCountClick={this.handleCountClick}
+              handleCountClick={(index,value)=>cartEmitter.changeCount(index,value)}
             />
           ):('')}   
           <div style={{width:(this.state.open?("75%"):("100%"))}}className="content__inner">
             {this.state.products.map((product,index)=>(
               <Product 
-              onClick={()=>this.handleProductClick(product)} 
+              onClick={()=>cartEmitter.addProduct(product)}
+              // onClick={()=>this.handleProductClick(product)} 
               productClass = {this.state.open?("open"):("closed")}
               style={{width:(this.state.open?("33.3333%"):("25%"))}} 
               key={index} 
