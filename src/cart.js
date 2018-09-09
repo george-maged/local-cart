@@ -41,14 +41,14 @@ class CartEmitter {
         this.emit('cart.changed', this.cart)
     }
     changeCount(index,value) {
-        let cart = this.cart.slice(0);
+        let cart = this.cart;
         cart[index].count += value;
         if (cart[index].count < 1) {
             cart.splice(index, 1)
         }
         this.emit('cart.changed', this.cart)
     }
-    clearCart(index,value) {
+    clearCart() {
         this.cart = []
         this.emit('cart.changed', this.cart)
     }
@@ -57,4 +57,4 @@ class CartEmitter {
     }
 
 }
-export default CartEmitter
+module.exports = CartEmitter
