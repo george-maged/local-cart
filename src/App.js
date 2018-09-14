@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import Product from './Components/Product'
 import Cart from './Components/Cart'
-import CartEmitter from "./cart"
+import CartEmitter from "./cart";
+import CartHeader from './Components/CartHeader'
 let cartEmitter = new CartEmitter();
 class App extends Component {
   constructor(){
@@ -10,7 +11,6 @@ class App extends Component {
     this.handleCartClick = this.handleCartClick.bind(this)
     this.state={
       products:[],
-      cart:cartEmitter.getCart(),
       open:false
     }
   }
@@ -25,7 +25,6 @@ class App extends Component {
     })
     cartEmitter.subscribe("cart.changed",(newCart)=>{
       this.setState({
-        cart:newCart,
         open:true
       })
     })
@@ -40,17 +39,16 @@ class App extends Component {
           <span className="header__left">
             SHOP
           </span>
-          <span className="header__right">
-            <img alt="cart" onClick={this.handleCartClick} src={require("./img/cart.png")}/>
-          </span>
+          <CartHeader
+            cartEmitter = {cartEmitter}
+          />
         </div>
         <div className="content">
         {this.state.open?(
             <Cart
-              cart={this.state.cart}
-              // cartEmitter={CartEmitter}
+              // cart={this.state.cart}
+              cartEmitter={cartEmitter}
               handleClearClick={this.handleClearClick}
-              handleCountClick={(index,value)=>cartEmitter.changeCount(index,value)}
             />
           ):('')}   
           <div style={{width:(this.state.open?("75%"):("100%"))}}className="content__inner">
